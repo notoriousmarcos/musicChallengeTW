@@ -20,7 +20,7 @@ public struct Song: Codable, Identifiable {
     public let collectionID: Int?
     public let trackName: String?
     public let country: String?
-    public let artworkURL: String?
+    public let artworkUrl: String?
     public let releaseDate: String?
     public let artistID, trackTimeMillis: Int?
     public let collectionName: String?
@@ -29,7 +29,7 @@ public struct Song: Codable, Identifiable {
         case primaryGenreName, artistName, id, wrapperType, artistType, trackExplicitness, trackCensoredName
         case collectionID
         case trackName, country
-        case artworkURL
+        case artworkUrl
         case releaseDate
         case artistID
         case trackTimeMillis, collectionName

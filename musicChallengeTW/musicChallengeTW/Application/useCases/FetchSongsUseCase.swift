@@ -31,7 +31,9 @@ public class FetchSongsUseCase {
                 case .failure(let error): result(.failure(error))
                 }
             }, receiveValue: { songs in
-                result(.success(songs))
+                result(.success(songs.filter { song -> Bool in
+                    return song.wrapperType == .track
+                }))
             })
     }
 }

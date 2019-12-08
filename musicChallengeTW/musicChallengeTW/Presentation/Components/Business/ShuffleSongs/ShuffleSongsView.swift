@@ -14,9 +14,16 @@ struct ShuffleSongsView: View {
 
     var body: some View {
         NavigationView {
-            List {
-                ForEach(viewModel.songs) { _ in
-                    Text("Vaai")
+            VStack {
+                if viewModel.isLoading {
+                    ActivityIndicator(isAnimating: $viewModel.isLoading, style: .large)
+                } else {
+                    List {
+                        ForEach(viewModel.songs) { song in
+                            ShuffleSongCellView(viewModel: ShuffleSongCellViewModel(song: song))
+                        }
+                        .listRowBackground(Color.white)
+                    }
                 }
             }
             .navigationBarTitle(Text("Shuffle Songs"))
@@ -24,11 +31,16 @@ struct ShuffleSongsView: View {
                     self.viewModel.shuffle()
                 }, label: {
                     Image("shuffle")
+                        .foregroundColor(Color.main)
                 })
             )
+
         }
         .alert(isPresented: $viewModel.showAlert) {
-            Alert(title: Text("Important message"), message: Text("Wear sunscreen"), dismissButton: .default(Text("Got it!")))
+            if let error = viewModel.error {
+                return Alert(title: Text("Important message"), message: Text(error.localizedDescription), dismissButton: .default(Text("Got it!")))
+            }
+            return Alert(title: Text("Important message"), message: Text("geneticError"), dismissButton: .default(Text("Got it!")))
         }
         .onAppear {
             self.viewModel.load()

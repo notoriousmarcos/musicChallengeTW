@@ -10,7 +10,7 @@ import Foundation
 
 public class SongsResponse: NetworkResponse {
     public let httpURLResponse: HTTPURLResponse
-    public let songs: [Song]
+    public let songs: Songs
 
     public required init(data: Data?, httpURLResponse: HTTPURLResponse) throws {
         self.httpURLResponse = httpURLResponse
@@ -31,5 +31,5 @@ public class SongsResponse: NetworkResponse {
 
 private struct ServerSuccessResponse: Codable {
     let resultCount: Int
-    let results: [Song]
+    let results: Songs
 }
