@@ -9,7 +9,11 @@
 import Foundation
 import Combine
 
-public class FetchSongsUseCase {
+public protocol FetchSongsUseCaseProtocol {
+    @discardableResult func execute(songs: [String], result: @escaping (Result<[Song], Error>) -> Void) throws -> AnyCancellable
+}
+
+public class FetchSongsUseCase: FetchSongsUseCaseProtocol {
     let networkClient: NetworkClient = HTTPClient()
 
     // MARK: - Initialization

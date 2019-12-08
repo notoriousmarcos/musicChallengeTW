@@ -10,11 +10,15 @@ import Foundation
 import Combine
 
 public class ShuffleSongsViewModel: ObservableObject {
-
+    private let useCase: FetchSongsUseCaseProtocol
     @Published var songs: Songs = [Song]()
     @Published var isLoading: Bool = true
     @Published var showAlert: Bool = false
     @Published var error: Error?
+
+    init(useCase: FetchSongsUseCaseProtocol) {
+        self.useCase = useCase
+    }
 
     func shuffle() {
         self.songs = self.songs.shuffled()
@@ -23,7 +27,7 @@ public class ShuffleSongsViewModel: ObservableObject {
     func load() {
         self.isLoading = true
         do {
-            try FetchSongsUseCase().execute(songs: ["909253", "1171421960", "358714030", "1419227", "264111789"], result: { result in
+            try useCase.execute(songs: ["909253", "1171421960", "358714030", "1419227", "264111789"], result: { result in
                 switch result {
                 case .success(let songs):
                     self.songs = songs

@@ -10,7 +10,7 @@ import SwiftUI
 import Combine
 
 struct ShuffleSongsView: View {
-    @ObservedObject var viewModel: ShuffleSongsViewModel = ShuffleSongsViewModel()
+    @ObservedObject var viewModel: ShuffleSongsViewModel = ShuffleSongsViewModel(useCase: FetchSongsUseCase())
 
     var body: some View {
         NavigationView {
