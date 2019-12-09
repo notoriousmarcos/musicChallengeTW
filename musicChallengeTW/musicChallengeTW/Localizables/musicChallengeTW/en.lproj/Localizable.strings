@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  musicChallengeTW
+
+  Created by Marcos Vinicius da Cunha Brito on 08/12/19.
+  Copyright © 2019 Marcos Vinicius da Cunha Brito. All rights reserved.
+*/
+"shuffle.songs.navbar.title" = "Shuffle Songs";
+"alert.default.title" = "Important message";
+"alert.default.message" = "Sorry, some error occures";
+"alert.default.confirm.action" = "Got it";
+

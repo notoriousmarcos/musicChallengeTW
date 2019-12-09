@@ -26,7 +26,7 @@ struct ShuffleSongsView: View {
                     }
                 }
             }
-            .navigationBarTitle(Text("Shuffle Songs"))
+            .navigationBarTitle(Text("shuffle.songs.navbar.title".localized))
             .navigationBarItems(trailing: Button(action: {
                     self.viewModel.shuffle()
                 }, label: {
@@ -38,9 +38,9 @@ struct ShuffleSongsView: View {
         }
         .alert(isPresented: $viewModel.showAlert) {
             if let error = viewModel.error {
-                return Alert(title: Text("Important message"), message: Text(error.localizedDescription), dismissButton: .default(Text("Got it!")))
+                return Alert(title: Text("alert.default.title".localized), message: Text(error.localizedDescription), dismissButton: .default(Text("alert.default.confirm.message".localized)))
             }
-            return Alert(title: Text("Important message"), message: Text("geneticError"), dismissButton: .default(Text("Got it!")))
+            return Alert(title: Text("alert.default.title".localized), message: Text("alert.default.message".localized), dismissButton: .default(Text("alert.default.confirm.message".localized)))
         }
         .onAppear {
             self.viewModel.load()

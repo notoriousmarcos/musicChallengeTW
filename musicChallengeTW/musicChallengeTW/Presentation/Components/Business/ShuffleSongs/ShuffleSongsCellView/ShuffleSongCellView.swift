@@ -28,6 +28,7 @@ struct ShuffleSongCellView: View {
                 .cornerRadius(5)
                 .imageScale(/*@START_MENU_TOKEN@*/.medium/*@END_MENU_TOKEN@*/)
                 .scaledToFit()
+                .accessibilityElement()
 
             Spacer().frame(width: 12.0)
 
