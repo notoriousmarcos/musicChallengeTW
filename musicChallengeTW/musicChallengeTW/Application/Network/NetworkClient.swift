@@ -10,6 +10,8 @@ import Foundation
 import Combine
 
 public protocol NetworkClient {
+    var session: URLSession { get }
+
     func execute(request: NetworkRequest) throws -> AnyPublisher<NetworkResponse, Error>
 }
 
@@ -20,12 +22,18 @@ public enum HTTPContentType: String {
 
 public class HTTPClient: NetworkClient {
 
+    public var session: URLSession
+
+    init(session: URLSession) {
+        self.session = session
+    }
+
     public func execute(request: NetworkRequest) throws -> AnyPublisher<NetworkResponse, Error> {
         guard let urlRequest = request.urlRequest() else {
             throw NetworkError.badRequest
         }
 
-        return URLSession.shared
+        return session
             .dataTaskPublisher(for: urlRequest)
             .tryMap { result -> NetworkResponse in
                guard let httpResponse = result.response as? HTTPURLResponse else {

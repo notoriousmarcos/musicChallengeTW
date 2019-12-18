@@ -10,18 +10,18 @@ import Foundation
 import Combine
 
 public protocol FetchSongsUseCaseProtocol {
-    @discardableResult func execute(songs: [String], result: @escaping (Result<[Song], Error>) -> Void) throws -> AnyCancellable
+    func execute(songs: [String], result: @escaping (Result<[Song], Error>) -> Void) throws -> AnyCancellable
 }
 
 public class FetchSongsUseCase: FetchSongsUseCaseProtocol {
-    let networkClient: NetworkClient = HTTPClient()
+    let networkClient: NetworkClient = HTTPClient(session: URLSession.shared)
 
     // MARK: - Initialization
     public init() {
     }
 
     // MARK: - Public methods
-    @discardableResult public func execute(songs: [String], result: @escaping (Result<[Song], Error>) -> Void) throws -> AnyCancellable {
+    public func execute(songs: [String], result: @escaping (Result<[Song], Error>) -> Void) throws -> AnyCancellable {
         let request = SongsRequest(songs: songs)
         return try networkClient.execute(request: request)
             .tryMap({ response -> [Song] in
